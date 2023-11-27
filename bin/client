@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
+// import client from "../src/client";
+
+const argv = yargs(hideBin(process.argv))
+	.option("server", {
+		describe: "Tunnel server url to connect",
+		demandOption: true,
+		type: "string",
+		default: "http://pranavs.tech"
+	})
+	.option("subdomain", {
+		describe: "subdomain you want to give ",
+		demandOption: true,
+		type: "string"
+    })
+    .option("hostname", {
+		describe: "local hostname",
+		demandOption: true,
+        type: "string",
+        default:"127.0.0.1"
+	})
+	.option("port", {
+		describe: "Specify the port",
+		demandOption: true,
+		type: "number"
+	})
+	.parse();
+
+const options = {
+	server: argv.server,
+	port: argv.port,
+    subdomain: argv.subdomain,
+    hostname:argv.hostname
+};
+
+
+
+// client(options).then((url) => {
+//     console.log(url);
+    
+// });
