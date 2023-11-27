@@ -1,5 +1,5 @@
 import http, { IncomingMessage } from "http";
-import { Readable } from "stream";
+import { Duplex, Writable } from "stream";
 import tldjs from "tldjs";
 import { v4 as uuid } from "uuid";
 import * as socketIO from "socket.io";
@@ -7,7 +7,7 @@ import * as socketIO from "socket.io";
 /** Wrapper for IncomingMessage with additional properties */
 interface CustomSocket extends NodeJS.Socket {
 	subdomain: string;
-	tunnelClientStream: Readable;
+	tunnelClientStream: Duplex;
 }
 
 interface CustomSocketIO extends socketIO.Socket {
@@ -17,24 +17,54 @@ interface CustomSocketIO extends socketIO.Socket {
 interface OPTIONS {
 	hostname: string;
 	port: number;
-	server: string;
 }
 // Storing Active Connected Sockets
 let ACTIVE_SOCKETS: Record<string, CustomSocketIO> = {};
+
 // Starting function
 const COLD_START = function (options: OPTIONS) {
+	
+    const server = http.createServer(async (req: IncomingMessage, res: http.ServerResponse) => {
+		try {
+			
+            const tunnelStream = await getClientSocketStream(req);
+			const reqBodyChunk: any = [];
+			req.on("error", (err) => {
+				console.log(err.stack);
+			});
+			req.on("data", (chunk) => {
+				reqBodyChunk.push(chunk);
+			});
+			req.on("end", () => {
+				if (req.complete) {
+					const reqLine = getReqLineFromReq(req);
+					const headers = getHeadersFromReq(req);
 
-	const server = http.createServer((req: IncomingMessage, res: http.ServerResponse) => {});
+					let reqBody = null;
+					if (reqBodyChunk.length > 0) {
+						reqBody = Buffer.concat(reqBodyChunk);
+					}
+
+					streamResponse(reqLine, headers, reqBody, tunnelStream);
+				}
+			});
+		} catch (error: any) {
+			console.log(error);
+			res.statusCode = 502;
+			res.end(error.message);
+		}
+	});
 
 	const io = new socketIO.Server(server);
 
-	const getClientSocketStream = async function (req: IncomingMessage):Promise<CustomSocket['tunnelClientStream']> {
+	const getClientSocketStream = async function (req: IncomingMessage): Promise<CustomSocket["tunnelClientStream"]> {
 		return new Promise((resolve, reject) => {
 			const hostname = req.headers.host;
 			if (!hostname) {
 				return reject(new Error("no hostname"));
 			}
 			const subdomain = tldjs.getSubdomain(hostname)!.toLowerCase();
+
 			if (!subdomain) {
 				return reject(new Error("no subdomain"));
 			}
@@ -44,7 +74,7 @@ const COLD_START = function (options: OPTIONS) {
 			}
 			const socket = req.socket as unknown as CustomSocket;
 
-			if (socket.tunnelClientStream !== undefined && socket.tunnelClientStream.destroyed && socket.subdomain === subdomain) {
+			if (socket.tunnelClientStream !== undefined && !socket.tunnelClientStream.destroyed && socket.subdomain === subdomain) {
 				return resolve(socket.tunnelClientStream);
 			}
 
@@ -54,7 +84,7 @@ const COLD_START = function (options: OPTIONS) {
 				socket.subdomain = subdomain;
 				socket.tunnelClientStream = tunnelClientStream;
 				tunnelClientStream.pipe(socket);
-				 return resolve(tunnelClientStream);
+				return resolve(tunnelClientStream);
 			});
 
 			tunnelSocket.emit("incomingClient", requestId);
@@ -84,5 +114,35 @@ const COLD_START = function (options: OPTIONS) {
 		});
 	});
 
+	function getReqLineFromReq(req: IncomingMessage) {
+		return `${req.method} ${req.url} HTTP/${req.httpVersion}`;
+	}
+
+	function getHeadersFromReq(req: IncomingMessage) {
+		const headers = [];
+
+		for (let i = 0; i < req.rawHeaders.length - 1; i += 2) {
+			headers.push(req.rawHeaders[i] + ": " + req.rawHeaders[i + 1]);
+		}
+
+		return headers;
+	}
+
+	function streamResponse(reqLine: string, headers: any, reqBody: any, tunnelClientStream: Writable) {
+		tunnelClientStream.write(reqLine);
+		tunnelClientStream.write("\r\n");
+		tunnelClientStream.write(headers.join("\r\n"));
+		tunnelClientStream.write("\r\n\r\n");
+		if (reqBody) {
+			tunnelClientStream.write(reqBody);
+		}
+	}
+
 	server.listen(options.port, options.hostname);
+
+	console.log("server is listening on port " + options.port);
 };
+
+COLD_START({ hostname: "0.0.0.0", port: 3000 });
+
+export default COLD_START;
