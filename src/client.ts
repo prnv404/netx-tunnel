@@ -6,7 +6,7 @@ interface OPTIONS {
 	port: number;
 	hostname: string;
 	subdomain: string;
-}
+}	
 
 function start(options: OPTIONS) {
 	return new Promise((resolve, reject) => {
@@ -32,12 +32,20 @@ function start(options: OPTIONS) {
 			});
 
 			socket.on("incomingClient", (requestId) => {
-				let client = net.createConnection(options.port, options.hostname, () => {
+				console.log(requestId);
+
+				let client = net.createConnection(options["port"], options["hostname"], () => {
 					client.on("end", () => {
+						console.log(client);
+						socket.emit(requestId, client);
 						client.destroy();
 					});
-					socket.emit(requestId, client);
-				});
+	
+					client.on("error", (err) => {
+						console.log(err);
+					});
+				 });
+				
 			});
 		});
 	});

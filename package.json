@@ -5,6 +5,8 @@
 	"main": "index.ts",
 	"scripts": {
 		"start": "nodemon --watch '*.ts' --exec 'ts-node' src/server.ts",
+		"client": "nodemon --watch '*.ts' --exec 'ts-node' src/client.ts",
+
 		"prettier":"prettier --write ."
 	},
 	"keywords": [
