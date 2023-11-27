@@ -4,7 +4,8 @@
 	"description": "A Tunnel server for exposing localhost to public internet",
 	"main": "index.ts",
 	"scripts": {
-		"start": "nodemon --watch '*.ts' --exec 'ts-node' src/server.ts"
+		"start": "nodemon --watch '*.ts' --exec 'ts-node' src/server.ts",
+		"prettier":"prettier --write ."
 	},
 	"keywords": [
 		"tunnel",
