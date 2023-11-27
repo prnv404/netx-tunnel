@@ -23,11 +23,9 @@ let ACTIVE_SOCKETS: Record<string, CustomSocketIO> = {};
 
 // Starting function
 const COLD_START = function (options: OPTIONS) {
-	
-    const server = http.createServer(async (req: IncomingMessage, res: http.ServerResponse) => {
+	const server = http.createServer(async (req: IncomingMessage, res: http.ServerResponse) => {
 		try {
-			
-            const tunnelStream = await getClientSocketStream(req);
+			const tunnelStream = await getClientSocketStream(req);
 			const reqBodyChunk: any = [];
 			req.on("error", (err) => {
 				console.log(err.stack);
@@ -70,7 +68,7 @@ const COLD_START = function (options: OPTIONS) {
 			}
 			let tunnelSocket = ACTIVE_SOCKETS[subdomain];
 			if (!tunnelSocket) {
-				return reject("tunnel client is not registered or offline at this moment");
+				return reject(new Error("tunnel client is not registered or offline at this moment"));
 			}
 			const socket = req.socket as unknown as CustomSocket;
 
@@ -95,6 +93,7 @@ const COLD_START = function (options: OPTIONS) {
 		const socket = tunnelSocket as CustomSocketIO;
 		socket.on("createTunnel", (requestedName, resCallback) => {
 			if (socket.requestedName) {
+				return;
 			}
 			if (ACTIVE_SOCKETS[requestedName]) {
 				resCallback("subDomain is not Available");
@@ -143,6 +142,6 @@ const COLD_START = function (options: OPTIONS) {
 	console.log("server is listening on port " + options.port);
 };
 
-COLD_START({ hostname: "0.0.0.0", port: 3000 });
+COLD_START({ hostname: "pranavs.tech", port: 80 });
 
 export default COLD_START;

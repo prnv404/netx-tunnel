@@ -29,6 +29,7 @@
 	},
 	"dependencies": {
 		"socket.io": "^4.7.2",
+		"socket.io-client": "^4.7.2",
 		"socket.io-stream": "^0.9.1",
 		"tldjs": "^2.3.1",
 		"uuid": "^9.0.1",
