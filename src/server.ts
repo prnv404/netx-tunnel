@@ -15,7 +15,7 @@ interface CustomSocketIO extends socketIO.Socket {
 	requestedName: string;
 }
 
-interface OPTIONS {
+interface ServerOptions  {
 	hostname: string;
 	port: number;
 }
@@ -23,7 +23,8 @@ interface OPTIONS {
 let ACTIVE_SOCKETS: Record<string, CustomSocketIO> = {};
 
 // Starting function
-const COLD_START = function (options: OPTIONS) {
+const initializeServer = function (options: ServerOptions) {
+
 	const server = http.createServer(async (req: IncomingMessage, res: http.ServerResponse) => {
 		try {
 			const tunnelStream = await getClientSocketStream(req);
@@ -36,8 +37,8 @@ const COLD_START = function (options: OPTIONS) {
 			});
 			req.on("end", () => {
 				if (req.complete) {
-					const reqLine = getReqLineFromReq(req);
-					const headers = getHeadersFromReq(req);
+					const reqLine = getRequestLineFromRequest(req);
+					const headers = getHeadersFromRequest(req);
 
 					let reqBody = null;
 					if (reqBodyChunk.length > 0) {
@@ -114,11 +115,11 @@ const COLD_START = function (options: OPTIONS) {
 		});
 	});
 
-	function getReqLineFromReq(req: IncomingMessage) {
+	function getRequestLineFromRequest(req: IncomingMessage) {
 		return `${req.method} ${req.url} HTTP/${req.httpVersion}`;
 	}
 
-	function getHeadersFromReq(req: IncomingMessage) {
+	function getHeadersFromRequest(req: IncomingMessage) {
 		const headers = [];
 
 		for (let i = 0; i < req.rawHeaders.length - 1; i += 2) {
@@ -143,6 +144,6 @@ const COLD_START = function (options: OPTIONS) {
 	console.log("server is listening on port " + options.port);
 };
 
-COLD_START({ hostname: "localhost", port: 80 });
+initializeServer({ hostname: "localhost", port: 80 });
 
-export default COLD_START;
+export default initializeServer;

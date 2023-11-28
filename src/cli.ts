@@ -1,5 +1,1 @@
-
-export const printToConsole = () => {
-    
-
-}
+export const printToConsole = () => {};

@@ -14,12 +14,12 @@ const argv = yargs(hideBin(process.argv))
 		describe: "subdomain you want to give ",
 		demandOption: true,
 		type: "string"
-    })
-    .option("hostname", {
+	})
+	.option("hostname", {
 		describe: "local hostname",
 		demandOption: true,
-        type: "string",
-        default:"127.0.0.1"
+		type: "string",
+		default: "127.0.0.1"
 	})
 	.option("port", {
 		describe: "Specify the port",
@@ -31,13 +31,11 @@ const argv = yargs(hideBin(process.argv))
 const options = {
 	server: argv.server,
 	port: argv.port,
-    subdomain: argv.subdomain,
-    hostname:argv.hostname
+	subdomain: argv.subdomain,
+	hostname: argv.hostname
 };
-
-
 
 // client(options).then((url) => {
 //     console.log(url);
-    
+
 // });

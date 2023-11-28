@@ -1,5 +1,5 @@
 import io from "socket.io-client";
-import net from 'net'
+import net from "net";
 import ss from "socket.io-stream";
 
 interface OPTIONS {
@@ -14,8 +14,6 @@ function start(options: OPTIONS) {
 		const socket = io(options.server);
 
 		socket.on("connect", () => {
-			
-
 			socket.emit("createTunnel", options["subdomain"], () => {
 				let url;
 				let subdomain = options["subdomain"].toString();
