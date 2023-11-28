@@ -16,8 +16,8 @@
 		"localhost"
 	],
 	"bin": {
-		"netx": "build/lib/client.js",
-		"server": "build/lib/server.js"
+		"netx": "build/bin/client.js",
+		"server": "build/bin/server.js"
 	},
 	"author": "pranav s",
 	"license": "MIT",
