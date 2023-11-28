@@ -6,7 +6,8 @@
 	"scripts": {
 		"start": " nodemon --watch '*.ts' --exec 'ts-node' src/server.ts",
 		"client": "nodemon --watch '*.ts' --exec 'ts-node' src/client.ts",
-		"prettier": "prettier --write ."
+		"prettier": "prettier --write .",
+		"build": "tsc"
 	},
 	"keywords": [
 		"tunnel",
@@ -30,6 +31,7 @@
 		"typescript": "^5.3.2"
 	},
 	"dependencies": {
+		"@types/yargs": "^17.0.32",
 		"socket.io": "^4.7.2",
 		"socket.io-client": "^4.7.2",
 		"socket.io-stream": "^0.9.1",

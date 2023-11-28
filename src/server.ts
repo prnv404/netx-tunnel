@@ -23,7 +23,7 @@ interface OPTIONS {
 let ACTIVE_SOCKETS: Record<string, CustomSocketIO> = {};
 
 // Starting function
-const COLD_START = function (options: OPTIONS) {
+const initializeServer = function (options: OPTIONS) {
 	const server = http.createServer(async (req: IncomingMessage, res: http.ServerResponse) => {
 		try {
 			const tunnelStream = await getClientSocketStream(req);
@@ -143,6 +143,5 @@ const COLD_START = function (options: OPTIONS) {
 	console.log("server is listening on port " + options.port);
 };
 
-COLD_START({ hostname: "pranavs.tech", port: 80 });
 
-export default COLD_START;
+export default initializeServer;

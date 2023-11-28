@@ -9,11 +9,13 @@ interface OPTIONS {
 	subdomain: string;
 }
 
-function start(options: OPTIONS) {
+function initiliazeClient(options: OPTIONS) {
 	return new Promise((resolve, reject) => {
+		// connecting to socket.io server
 		const socket = io(options.server);
 
 		socket.on("connect", () => {
+			// emiting createTunnel event to create tunnel connection with subdomain
 			socket.emit("createTunnel", options["subdomain"], () => {
 				let url;
 				let subdomain = options["subdomain"].toString();
@@ -28,15 +30,18 @@ function start(options: OPTIONS) {
 				}
 				resolve(url);
 			});
-
+			// registering incomingClient event for proxying request to locally running application
 			socket.on("incomingClient", (requestId) => {
+				// creating a tcp connection
 				let client = net.createConnection(options["port"], options["hostname"], () => {
+					// creating socket stream
 					let s = ss.createStream({});
+					// pipeing stream with tcp client
 					s.pipe(client).pipe(s);
 					s.on("end", () => {
 						client.destroy();
 					});
-
+					// sending the request socket stream
 					ss(socket).emit(requestId, s);
 				});
 			});
@@ -44,10 +49,4 @@ function start(options: OPTIONS) {
 	});
 }
 
-start({ hostname: "127.0.0.1", port: 5500, server: "http://pranavs.tech", subdomain: "landing" })
-	.then((url) => {
-		console.log(url);
-	})
-	.catch((err) => {
-		console.log(err);
-	});
+export default initiliazeClient
