@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-const yargs = require("yargs");
-const { hideBin } = require("yargs/helpers");
-const client = require("../build/client");
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
+import client from '../build/client.js'
 
 const main = async () => {
 	const argv = await yargs(hideBin(process.argv))
@@ -37,7 +37,7 @@ const main = async () => {
 	};
 
 
-	client.default(options);
+	client(options);
 };
 
 main();
