@@ -14,8 +14,7 @@ function start(options: OPTIONS) {
 		const socket = io(options.server);
 
 		socket.on("connect", () => {
-			console.log(new Date() + ": connected");
-			console.log(new Date() + ": requesting subdomain " + options["subdomain"] + " via " + options["server"]);
+			
 
 			socket.emit("createTunnel", options["subdomain"], () => {
 				let url;
