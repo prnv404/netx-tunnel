@@ -1,12 +1,10 @@
 #!/usr/bin/env node
-const  yargs = require("yargs")
-const  { hideBin } = require("yargs/helpers")
-const client = require("../build/client")
-
-
+const yargs = require("yargs");
+const { hideBin } = require("yargs/helpers");
+const client = require("../build/client");
 
 const main = async () => {
-	const argv= await yargs(hideBin(process.argv))
+	const argv = await yargs(hideBin(process.argv))
 		.option("server", {
 			describe: "Tunnel server url to connect",
 			demandOption: true,
@@ -32,13 +30,14 @@ const main = async () => {
 		.parse();
 
 	const options = {
-		server: argv.server ,
+		server: argv.server,
 		port: argv.port,
-		subdomain: argv.subdomain ,
-		hostname: argv.hostname 
+		subdomain: argv.subdomain,
+		hostname: argv.hostname
 	};
 
-	client(options);
+
+	client.default(options);
 };
 
 main();

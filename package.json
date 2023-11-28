@@ -3,11 +3,12 @@
 	"version": "1.0.0",
 	"description": "A Tunnel server for exposing localhost to public internet",
 	"main": "index.ts",
+	"type": "module",
 	"scripts": {
 		"start": " nodemon --watch '*.ts' --exec 'ts-node' src/server.ts",
 		"client": "nodemon --watch '*.ts' --exec 'ts-node' src/client.ts",
 		"prettier": "prettier --write .",
-		"build": "tsc"
+		"build": "npx tsc"
 	},
 	"keywords": [
 		"tunnel",
@@ -15,23 +16,32 @@
 		"localhost"
 	],
 	"bin": {
-		"netx": "bin/client",
-		"server": "bin/server"
+		"netx": "build/bin/client",
+		"server": "build/bin/server"
 	},
 	"author": "pranav s",
 	"license": "MIT",
 	"devDependencies": {
+		"@types/chalk": "^2.2.0",
+		"@types/clear": "^0.1.4",
+		"@types/core-js": "^2.5.8",
 		"@types/express": "^4.17.21",
+		"@types/figlet": "^1.5.8",
 		"@types/node": "^20.10.0",
+		"@types/ora": "^3.2.0",
 		"@types/tldjs": "^2.3.4",
 		"@types/uuid": "^9.0.7",
 		"nodemon": "^3.0.1",
 		"prettier": "^3.1.0",
-		"ts-node": "^10.9.1",
-		"typescript": "^5.3.2"
+		"ts-node": "^10.9.1"
 	},
 	"dependencies": {
 		"@types/yargs": "^17.0.32",
+		"chalk": "^5.3.0",
+		"clear": "^0.1.0",
+		"core-js": "^3.33.3",
+		"figlet": "^1.7.0",
+		"ora": "^7.0.1",
 		"socket.io": "^4.7.2",
 		"socket.io-client": "^4.7.2",
 		"socket.io-stream": "^0.9.1",

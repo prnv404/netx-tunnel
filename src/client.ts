@@ -10,6 +10,7 @@ interface OPTIONS {
 }
 
 function initiliazeClient(options: OPTIONS) {
+
 	return new Promise((resolve, reject) => {
 		// connecting to socket.io server
 		const socket = io(options.server);
