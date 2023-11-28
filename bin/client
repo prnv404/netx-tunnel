@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import yargs from 'yargs'
-import { hideBin } from 'yargs/helpers'
-import client from '../build/client.js'
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
+import client from "../build/client.js";
 
 const main = async () => {
 	const argv = await yargs(hideBin(process.argv))
@@ -36,8 +36,9 @@ const main = async () => {
 		hostname: argv.hostname
 	};
 
-
-	client(options);
+	client(options).then((url) => {
+		console.log(url);
+	});
 };
 
 main();

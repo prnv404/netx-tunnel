@@ -16,8 +16,8 @@
 		"localhost"
 	],
 	"bin": {
-		"netx": "build/bin/client",
-		"server": "build/bin/server"
+		"netx": "bin/client",
+		"server": "bin/server"
 	},
 	"author": "pranav s",
 	"license": "MIT",
