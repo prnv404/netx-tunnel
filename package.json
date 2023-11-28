@@ -1,5 +1,5 @@
 {
-	"name": "netx",
+	"name": "netx-tunnel",
 	"version": "1.0.0",
 	"description": "A Tunnel server for exposing localhost to public internet",
 	"main": "index.ts",
