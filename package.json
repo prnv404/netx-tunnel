@@ -5,10 +5,10 @@
 	"main": "index.ts",
 	"type": "module",
 	"scripts": {
-		"start": " nodemon --watch '*.ts' --exec 'ts-node' src/server.ts",
-		"client": "nodemon --watch '*.ts' --exec 'ts-node' src/client.ts",
+		"start": " nodemon --watch '*.ts' --exec 'npx tsx' src/server.ts",
+		"client": "nodemon --watch '*.ts' --exec 'npx tsx' src/client.ts",
 		"prettier": "prettier --write .",
-		"build": "npx tsc"
+		"build": "tsc"
 	},
 	"keywords": [
 		"tunnel",

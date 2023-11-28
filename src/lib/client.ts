@@ -3,6 +3,7 @@ import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import client from "../client.js";
 import * as cli from "../cli.js";
+import ora from "ora";
 
 const main = async () => {
 	const argv = await yargs(hideBin(process.argv))
@@ -13,6 +14,7 @@ const main = async () => {
 			default: "http://pranavs.tech"
 		})
 		.option("subdomain", {
+			alias: "sub",
 			describe: "subdomain you want to give ",
 			demandOption: true,
 			type: "string"
@@ -24,6 +26,7 @@ const main = async () => {
 			default: "127.0.0.1"
 		})
 		.option("port", {
+			alias: "p",
 			describe: "Specify the port",
 			demandOption: true,
 			type: "number"
@@ -37,14 +40,15 @@ const main = async () => {
 		hostname: argv.hostname
 	};
 
-	client(options).then((url) => {
-	  cli.printIntro("NET  X  TUNNEL");
 
+	client(options).then( (url) => {
+		cli.printIntro("NET  X  TUNNEL");
+		const spinner = cli.runSpinner("connecting to tunnel server")
+		spinner.start()
 		setTimeout(() => {
+			spinner.stop()
 			console.log(url);
 		}, 3000);
-
-		console.log();
 	});
 };
 

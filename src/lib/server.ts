@@ -2,22 +2,17 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import server from "../server.js";
-
 const main = async () => {
 	const argv = await yargs(hideBin(process.argv))
 		.option("server", {
+			alias: "s",
 			describe: "Tunnel server url to connect",
 			demandOption: true,
 			type: "string",
 			default: "http://pranavs.tech"
 		})
-		.option("hostname", {
-			describe: "local hostname",
-			demandOption: true,
-			type: "string",
-			default: "127.0.0.1"
-		})
 		.option("port", {
+			alias: "p",
 			describe: "Specify the port",
 			demandOption: true,
 			type: "number"
@@ -26,10 +21,9 @@ const main = async () => {
 
 	const options = {
 		server: argv.server,
-		port: argv.port,
-		hostname: argv.hostname
+		port: argv.port
 	};
+
 	server(options);
 };
-
 main();

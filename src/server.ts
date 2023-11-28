@@ -16,7 +16,7 @@ interface CustomSocketIO extends socketIO.Socket {
 }
 
 interface OPTIONS {
-	hostname: string;
+	hostname?: string;
 	port: number;
 }
 // Storing Active Connected Sockets
