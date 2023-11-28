@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		/* Visit https://aka.ms/tsconfig.json to read more about this file */
-
+		"typeRoots": ["src","node_modules/*"],
 		/* Basic Options */
 		"target": "es6" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */,
 		"module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
@@ -29,5 +29,5 @@
 		"forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
 	},
 	"exclude": ["node_modules", "dist", "coverage"],
-	"include": ["**/*.ts"]
+	"include": ["**/*.ts", "src/socket.io-stream.d.ts"]
 }

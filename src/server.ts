@@ -3,6 +3,7 @@ import { Duplex, Writable } from "stream";
 import tldjs from "tldjs";
 import { v4 as uuid } from "uuid";
 import * as socketIO from "socket.io";
+import ss from "socket.io-stream";
 
 /** Wrapper for IncomingMessage with additional properties */
 interface CustomSocket extends NodeJS.Socket {
@@ -78,11 +79,11 @@ const COLD_START = function (options: OPTIONS) {
 
 			let requestId = uuid();
 
-			tunnelSocket.once(requestId, (tunnelClientStream) => {
+			ss(tunnelSocket).once(requestId, (tunnelClientStream: any) => {
 				socket.subdomain = subdomain;
 				socket.tunnelClientStream = tunnelClientStream;
 				tunnelClientStream.pipe(socket);
-				return resolve(tunnelClientStream);
+				resolve(tunnelClientStream);
 			});
 
 			tunnelSocket.emit("incomingClient", requestId);
@@ -142,6 +143,6 @@ const COLD_START = function (options: OPTIONS) {
 	console.log("server is listening on port " + options.port);
 };
 
-COLD_START({ hostname: "pranavs.tech", port: 80 });
+COLD_START({ hostname: "localhost", port: 80 });
 
 export default COLD_START;

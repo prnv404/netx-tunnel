@@ -4,10 +4,9 @@
 	"description": "A Tunnel server for exposing localhost to public internet",
 	"main": "index.ts",
 	"scripts": {
-		"start": "nodemon --watch '*.ts' --exec 'ts-node' src/server.ts",
+		"start": " nodemon --watch '*.ts' --exec 'ts-node' src/server.ts",
 		"client": "nodemon --watch '*.ts' --exec 'ts-node' src/client.ts",
-
-		"prettier":"prettier --write ."
+		"prettier": "prettier --write ."
 	},
 	"keywords": [
 		"tunnel",
@@ -33,6 +32,7 @@
 	"dependencies": {
 		"socket.io": "^4.7.2",
 		"socket.io-client": "^4.7.2",
+		"socket.io-stream": "^0.9.1",
 		"tldjs": "^2.3.1",
 		"uuid": "^9.0.1",
 		"yargs": "^17.7.2"

@@ -1,12 +1,13 @@
 import io from "socket.io-client";
-import net from "net";
+import net from 'net'
+import ss from "socket.io-stream";
 
 interface OPTIONS {
 	server: string;
 	port: number;
 	hostname: string;
 	subdomain: string;
-}	
+}
 
 function start(options: OPTIONS) {
 	return new Promise((resolve, reject) => {
@@ -32,26 +33,21 @@ function start(options: OPTIONS) {
 			});
 
 			socket.on("incomingClient", (requestId) => {
-				console.log(requestId);
-
 				let client = net.createConnection(options["port"], options["hostname"], () => {
-					client.on("end", () => {
-						console.log(client);
-						socket.emit(requestId, client);
+					let s = ss.createStream({});
+					s.pipe(client).pipe(s);
+					s.on("end", () => {
 						client.destroy();
 					});
-	
-					client.on("error", (err) => {
-						console.log(err);
-					});
-				 });
-				
+
+					ss(socket).emit(requestId, s);
+				});
 			});
 		});
 	});
 }
 
-start({ hostname: "127.0.0.1", port: 3000, server: "http://pranavs.tech", subdomain: "hello" })
+start({ hostname: "127.0.0.1", port: 5500, server: "http://pranavs.tech", subdomain: "landing" })
 	.then((url) => {
 		console.log(url);
 	})
