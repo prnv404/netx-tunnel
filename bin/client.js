@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import client from "../client.js";
-import * as cli from "../cli.js";
+import client from '../build/client.js';
 
 const argv = await yargs(hideBin(process.argv))
 	.option("server", {
@@ -39,11 +38,9 @@ const options = {
 };
 
 client(options).then((url) => {
-	cli.printIntro("NET  X  TUNNEL");
-	const spinner = cli.runSpinner("connecting to tunnel server");
-	spinner.start();
 	setTimeout(() => {
 		spinner.stop();
 		console.log(url);
 	}, 3000);
 });
+

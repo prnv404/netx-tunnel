@@ -16,8 +16,8 @@
 		"localhost"
 	],
 	"bin": {
-		"netx": "build/bin/client.js",
-		"server": "build/bin/server.js"
+		"netx": "./bin/client.js",
+		"server": "./bin/server.js"
 	},
 	"author": "pranav s",
 	"license": "MIT",
@@ -41,6 +41,7 @@
 		"clear": "^0.1.0",
 		"core-js": "^3.33.3",
 		"figlet": "^1.7.0",
+		"g": "^2.0.1",
 		"ora": "^7.0.1",
 		"socket.io": "^4.7.2",
 		"socket.io-client": "^4.7.2",
