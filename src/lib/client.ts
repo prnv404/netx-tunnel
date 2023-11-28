@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import client from "../build/client.js";
+import client from "../client.js";
+import * as cli from "../cli.js";
 
 const main = async () => {
 	const argv = await yargs(hideBin(process.argv))
@@ -37,7 +38,13 @@ const main = async () => {
 	};
 
 	client(options).then((url) => {
-		console.log(url);
+	  cli.printIntro("NET  X  TUNNEL");
+
+		setTimeout(() => {
+			console.log(url);
+		}, 3000);
+
+		console.log();
 	});
 };
 
