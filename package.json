@@ -1,6 +1,6 @@
 {
 	"name": "netx-tunnel",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A Tunnel server for exposing localhost to public internet",
 	"main": "index.ts",
 	"type": "module",
@@ -16,7 +16,7 @@
 		"localhost"
 	],
 	"bin": {
-		"netx": "./bin/client.js",
+		"netx-tunnel": "./bin/client.js",
 		"server": "./bin/server.js"
 	},
 	"author": "pranav s",
