@@ -1,5 +1,4 @@
 // socket.io-stream.d.ts
-import { } from '../server.js'
 declare module "socket.io-stream" {
 	import * as stream from "stream";
 	export function createStream(options: any): stream.Duplex;
