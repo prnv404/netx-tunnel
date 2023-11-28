@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 import net from "net";
 import ss from "socket.io-stream";
-
+import * as cli from "./cli.js";
 interface OPTIONS {
 	server: string;
 	port: number;
@@ -10,7 +10,6 @@ interface OPTIONS {
 }
 
 function initiliazeClient(options: OPTIONS) {
-
 	return new Promise((resolve, reject) => {
 		// connecting to socket.io server
 		const socket = io(options.server);
@@ -34,6 +33,7 @@ function initiliazeClient(options: OPTIONS) {
 			// registering incomingClient event for proxying request to locally running application
 			socket.on("incomingClient", (requestId) => {
 				// creating a tcp connection
+				cli.printRequest(requestId);
 				let client = net.createConnection(options["port"], options["hostname"], () => {
 					// creating socket stream
 					let s = ss.createStream({});
@@ -50,4 +50,4 @@ function initiliazeClient(options: OPTIONS) {
 	});
 }
 
-export default initiliazeClient
+export default initiliazeClient;
