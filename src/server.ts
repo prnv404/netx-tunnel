@@ -5,7 +5,6 @@ import { v4 as uuid } from "uuid";
 import * as socketIO from "socket.io";
 import ss from "socket.io-stream";
 
-/** Wrapper for IncomingMessage with additional properties */
 interface CustomSocket extends NodeJS.Socket {
 	subdomain: string;
 	tunnelClientStream: Duplex;
@@ -142,6 +141,5 @@ const initializeServer = function (options: OPTIONS) {
 
 	console.log("server is listening on port " + options.port);
 };
-
 
 export default initializeServer;
