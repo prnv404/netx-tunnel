@@ -2,7 +2,4 @@
 .gitignore
 .github
 .prettierrc
-.eslintrc.js
-.husky
-jest.config.ts
 src
