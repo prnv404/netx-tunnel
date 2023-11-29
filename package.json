@@ -1,6 +1,7 @@
 {
-	"name": "netx-tunnel",
-	"version": "1.0.8",
+	"name": "netxtunnel",
+	"version": "1.0.0",
+	"author": "pranav s",
 	"description": "A Tunnel server for exposing localhost to public internet",
 	"main": "index.ts",
 	"type": "module",
@@ -16,11 +17,8 @@
 		"localhost"
 	],
 	"bin": {
-		"netx-tunnel": "./bin/client.js",
-		"server": "./bin/server.js"
+		"netx": "./bin/client.js"
 	},
-	"author": "pranav s",
-	"license": "MIT",
 	"devDependencies": {
 		"@types/chalk": "^2.2.0",
 		"@types/clear": "^0.1.4",
@@ -31,9 +29,9 @@
 		"@types/ora": "^3.2.0",
 		"@types/tldjs": "^2.3.4",
 		"@types/uuid": "^9.0.7",
+		"@types/yargs": "^17.0.32",
 		"nodemon": "^3.0.1",
 		"prettier": "^3.1.0",
-		"@types/yargs": "^17.0.32",
 		"ts-node": "^10.9.1"
 	},
 	"dependencies": {
@@ -49,5 +47,6 @@
 		"tldjs": "^2.3.1",
 		"uuid": "^9.0.1",
 		"yargs": "^17.7.2"
-	}
+	},
+	"license": "MIT"
 }
