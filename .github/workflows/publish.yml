@@ -1,5 +1,17 @@
 name: "publish package to npm"
-on: push
+on: 
+  push:
+    tags:
+      - 'v*'
+
+defaults:
+  run:
+    shell: bash
+
+env:
+ ACTIONS_RUNNER_DEBUG: true
+  
+
 jobs:
     publish:
         runs-on: ubuntu-latest

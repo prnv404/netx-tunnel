@@ -16,7 +16,6 @@ export const runSpinner = (text: string) => {
 };
 
 export const printRequest = (reqId: string) => {
-	const { green, yellow, red, bold } = chalk;
 	const currentDate = new Date();
 	const day = currentDate.getDate();
 	const month = currentDate.getMonth() + 1;
@@ -29,7 +28,7 @@ export const printRequest = (reqId: string) => {
 	console.log(chalk.bgGreen("Request") + " -----> " + chalk.bold(formattedDate));
 };
 
-export const printUrl = (url:string) => {
+export const printUrl = (url: string) => {
 	const msg = `Bridge Localhost to the Universe! 🌌🌐  ${chalk.italic(url)}`;
 	console.log(msg);
 };
