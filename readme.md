@@ -23,3 +23,4 @@ Make sure you have the following installed on your system:
 ```bash
 npx netx-tunnel --subdomain <eg:my-project> --port <eg:3000>
 ```
+Contributions are welcome! If you find a bug, have a feature request, or would like to contribute in any other way, feel free to open an issue or submit a pull request. Appreciate any help in making this project better for everyone!
