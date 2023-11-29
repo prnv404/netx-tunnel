@@ -1,6 +1,6 @@
 {
 	"name": "netx-tunnel",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "A Tunnel server for exposing localhost to public internet",
 	"main": "index.ts",
 	"type": "module",
