@@ -21,5 +21,5 @@ Make sure you have the following installed on your system:
 ### Installation
 
 ```bash
-npx netx-tunnel --subdomain <eg:example> --port <eg:3000>
+npx netx-tunnel --subdomain <eg:my-project> --port <eg:3000>
 ```
