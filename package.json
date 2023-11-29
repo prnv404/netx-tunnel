@@ -1,5 +1,5 @@
 {
-	"name": "netxtunnel",
+	"name": "netx-tunnel",
 	"version": "1.0.0",
 	"author": "pranav s",
 	"description": "A Tunnel server for exposing localhost to public internet",
