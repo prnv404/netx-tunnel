@@ -20,14 +20,7 @@ function initiliazeClient(options: OPTIONS) {
 				let url;
 				let subdomain = options["subdomain"].toString();
 				let server = options["server"].toString();
-
-				if (server.includes("https://")) {
-					url = `https://${subdomain}.${server.slice(8)}`;
-				} else if (server.includes("http://")) {
-					url = `http://${subdomain}.${server.slice(7)}`;
-				} else {
-					url = `https://${subdomain}.${server}`;
-				}
+				url = `https://${subdomain}.${server.slice(7)}`;
 				resolve(url);
 			});
 			// registering incomingClient event for proxying request to locally running application
