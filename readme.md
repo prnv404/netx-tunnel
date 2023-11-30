@@ -4,7 +4,7 @@
 
 The **netx tunnel** 🚀 is an application designed to expose your localhost application to the public internet. It simplifies the process of sharing your locally hosted web application, server, or service with others over the internet. This is particularly useful for testing, demonstrations, or collaboration with remote team members.
 
-<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHI1MWJ5ajRtbnR3NjF4dzkxZWZ0OWh0YWZtN2I4ZmhydTBmM3BtNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4MLqdpDbwdxKdun01Z/giphy.gif" width="1000" height="600">
+<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHI1MWJ5ajRtbnR3NjF4dzkxZWZ0OWh0YWZtN2I4ZmhydTBmM3BtNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4MLqdpDbwdxKdun01Z/giphy.gif" width="1000" height="500">
 
 ## Features
 
