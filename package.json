@@ -5,6 +5,10 @@
 	"description": "A Tunnel server for exposing localhost to public internet",
 	"main": "index.ts",
 	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/prnv404/netx-tunnel"
+	},
 	"scripts": {
 		"start": " nodemon --watch '*.ts' --exec 'npx tsx' src/server.ts",
 		"client": "nodemon --watch '*.ts' --exec 'npx tsx' src/client.ts",
