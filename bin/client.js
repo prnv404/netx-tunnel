@@ -40,12 +40,14 @@ const options = {
 
 cli.printIntro("NET-X-TUNNEL");
 
+cli.printContribution();
+
 const spinner = cli.runSpinner("connecting to tunnel server");
 spinner.start();
 client(options).then((url) => {
 	setTimeout(() => {
 		spinner.stop();
-		cli.printUrl(url)
+		cli.printUrl(url);
 		console.log("\n");
 	}, 3000);
 });

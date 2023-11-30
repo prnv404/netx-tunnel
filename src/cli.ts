@@ -7,7 +7,6 @@ export const printIntro = (name: string) => {
 	clear();
 	console.log(chalk.greenBright(flglet.textSync(name)));
 	console.log(chalk.bold("Localhost to World in a Snap! 🚀🌐"));
-	console.log("\n");
 };
 
 export const runSpinner = (text: string) => {
@@ -31,4 +30,10 @@ export const printRequest = (reqId: string) => {
 export const printUrl = (url: string) => {
 	const msg = `Bridge Localhost to the Universe! 🌌🌐  ${chalk.italic(url)}`;
 	console.log(msg);
+};
+
+export const printContribution = () => {
+	const msg = `Report bugs or suggest features at https://github.com/prnv404/netx-tunnel/issues`;
+	console.log(chalk.dim(chalk.italic(msg)));
+	console.log("\n");
 };
