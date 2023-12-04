@@ -70,7 +70,7 @@ const initializeServer = function (options: ServerOptions) {
 				socket.subdomain = subdomain;
 				socket.tunnelClientStream = tunnelClientStream;
 				tunnelClientStream.pipe(socket);
-				resolve(tunnelClientStream);
+				return resolve(tunnelClientStream);
 			});
 
 			tunnelSocket.emit("incomingClient", requestId);
@@ -79,6 +79,7 @@ const initializeServer = function (options: ServerOptions) {
 
 	io.on("connection", (tunnelSocket) => {
 		const socket = tunnelSocket as CustomSocketIO;
+		//@ts-ignore
 		socket.on("createTunnel", (requestedName, resCallback) => {
 			if (socket.requestedName) {
 				return;
