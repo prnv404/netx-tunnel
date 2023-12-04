@@ -1,6 +1,6 @@
 {
 	"name": "netx-tunnel",
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"author": "pranav s",
 	"description": "A Tunnel server for exposing localhost to public internet",
 	"main": "index.ts",
@@ -21,7 +21,7 @@
 		"localhost"
 	],
 	"bin": {
-		"netx-tunnel": "./bin/client.js"
+		"netx-tunnel": "./dist/netx.js"
 	},
 	"devDependencies": {
 		"@types/chalk": "^2.2.0",

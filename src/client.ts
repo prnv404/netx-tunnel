@@ -2,14 +2,10 @@ import io from "socket.io-client";
 import net from "net";
 import ss from "socket.io-stream";
 import * as cli from "./cli.js";
-interface OPTIONS {
-	server: string;
-	port: number;
-	hostname: string;
-	subdomain: string;
-}
+import { ClientOptions } from "./types/index.js";
 
-function initiliazeClient(options: OPTIONS) {
+
+function initiliazeClient(options: ClientOptions):Promise<string> {
 	return new Promise((resolve, reject) => {
 		// connecting to socket.io server
 		const socket = io(options.server);

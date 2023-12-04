@@ -1,28 +1,16 @@
 import http, { IncomingMessage } from "http";
-import { Duplex, Writable } from "stream";
+import { Writable } from "stream";
 import tldjs from "tldjs";
 import { v4 as uuid } from "uuid";
-import * as socketIO from "socket.io";
+import * as socketio from "socket.io";
 import ss from "socket.io-stream";
+import { CustomSocketIO, CustomSocket, ServerOptions } from "./types";
 
-interface CustomSocket extends NodeJS.Socket {
-	subdomain: string;
-	tunnelClientStream: Duplex;
-}
-
-interface CustomSocketIO extends socketIO.Socket {
-	requestedName: string;
-}
-
-interface OPTIONS {
-	hostname?: string;
-	port: number;
-}
 // Storing Active Connected Sockets
 let ACTIVE_SOCKETS: Record<string, CustomSocketIO> = {};
 
 // Starting function
-const initializeServer = function (options: OPTIONS) {
+const initializeServer = function (options: ServerOptions) {
 	const server = http.createServer(async (req: IncomingMessage, res: http.ServerResponse) => {
 		try {
 			const tunnelStream = await getClientSocketStream(req);
@@ -53,7 +41,7 @@ const initializeServer = function (options: OPTIONS) {
 		}
 	});
 
-	const io = new socketIO.Server(server);
+	const io = new socketio.Server(server);
 
 	const getClientSocketStream = async function (req: IncomingMessage): Promise<CustomSocket["tunnelClientStream"]> {
 		return new Promise((resolve, reject) => {

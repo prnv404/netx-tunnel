@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import client from "../build/client.js";
-import * as cli from "../build/cli.js";
+import client from "./client.js";
+import * as cli from "./cli.js";
 
 const argv = await yargs(hideBin(process.argv))
 	.option("server", {
