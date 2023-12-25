@@ -49,10 +49,13 @@ const initializeServer = function (options: ServerOptions) {
 			if (!hostname) {
 				return reject(new Error("no hostname"));
 			}
-			const subdomain = tldjs.getSubdomain(hostname)!.toLowerCase();
+			let subdomain = tldjs.getSubdomain(hostname)!.toLowerCase();
 
 			if (!subdomain) {
 				return reject(new Error("no subdomain"));
+			}
+			if (options.subdomain) {
+				subdomain = subdomain.replace(`.${options.subdomain}`, "");
 			}
 			let tunnelSocket = ACTIVE_SOCKETS[subdomain];
 			if (!tunnelSocket) {

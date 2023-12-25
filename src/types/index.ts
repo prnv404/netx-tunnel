@@ -20,4 +20,5 @@ export interface CustomSocketIO extends socketio.Socket {
 export type ServerOptions = {
 	hostname?: string;
 	port: number;
+	subdomain:string
 };

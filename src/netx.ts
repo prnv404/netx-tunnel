@@ -2,14 +2,14 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import client from "./client.js";
-import * as cli from "./cli.js";
+import * as cli from "./cli";
 
 const argv = await yargs(hideBin(process.argv))
 	.option("server", {
 		describe: "Tunnel server url to connect",
 		demandOption: true,
 		type: "string",
-		default: "http://pranavs.tech"
+		default: "https://pranavs.tech"
 	})
 	.option("subdomain", {
 		alias: "sub",
