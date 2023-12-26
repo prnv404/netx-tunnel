@@ -9,7 +9,7 @@ const argv = await yargs(hideBin(process.argv))
 		describe: "Tunnel server url to connect",
 		demandOption: true,
 		type: "string",
-		default: "https://pranavs.tech"
+		default: "https://tunnel.pranavs.tech"
 	})
 	.option("subdomain", {
 		alias: "sub",
