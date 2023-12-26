@@ -49,5 +49,5 @@ client(options).then((url) => {
 		spinner.stop();
 		cli.printUrl(url);
 		console.log("\n");
-	}, 3000);
+	}, 2000);
 });
